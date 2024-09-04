@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Dashboard = () => {
-  const campaigns = [
-    { id: 1, name: 'Summer Sale', successfulSent: 1000, pendingFailed: 50 },
-    { id: 2, name: 'New Product Launch', successfulSent: 500, pendingFailed: 25 },
-  ]
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/v1/campaign").then((res) => {
+      res.json().then((data) => {
+        setData(data?.data);
+      });
+    });
+  }, []);
+
+  console.log(data);
+  
 
   return (
     <div className="dashboard-container">
@@ -20,12 +28,12 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {campaigns.map((campaign) => (
-              <tr key={campaign.id}>
-                <td>{campaign.id}</td>
+            { data && data?.map((campaign) => (
+              <tr key={campaign._id}>
+                <td>{campaign._id}</td>
                 <td>{campaign.name}</td>
-                <td>{campaign.successfulSent}</td>
-                <td>{campaign.pendingFailed}</td>
+                <td>{campaign.delivered}</td>
+                <td>{campaign.failed}</td>
               </tr>
             ))}
           </tbody>
