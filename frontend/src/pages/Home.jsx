@@ -4,21 +4,28 @@ const Home = () => {
   const [campaignName, setCampaignName] = useState("");
   const [message, setMessage] = useState("");
   const [csvFile, setCsvFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const formData = new FormData();
     formData.append("csvFile", csvFile);
     formData.append("name", campaignName);
     formData.append("message", message);
     try {
-      const response = await fetch("/api/v1/campaign", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://quichub-assignment.onrender.com/api/v1/campaign",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      setIsLoading(false)
       console.log(response);
     } catch (error) {
       console.log(error);
+      setIsLoading(false)
     }
   };
 
@@ -61,7 +68,11 @@ const Home = () => {
             />
           </div>
 
-          <button type="submit">Create</button>
+          <button type="submit" style={{ backgroundColor: `${isLoading} ? "#ccc" : "#000"` }}>
+            {
+              isLoading ? "Submitting...": "Create"
+            }
+          </button>
         </form>
       </div>
     </div>
