@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { getPhoneNumbersFromCSV } from "../../../backend/src/utils/helpers";
 
 const Home = () => {
   const [campaignName, setCampaignName] = useState("");
