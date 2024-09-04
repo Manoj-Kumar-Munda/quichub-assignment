@@ -106,3 +106,31 @@ h1 {
     font-size: 14px;
   }
 }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: #1a1818;
+  color: #fff;
+}
+
+.menu ul {
+  display: flex;
+  gap: 12px;
+}
+
+.menu ul li {
+  list-style: none;
+  color: #fff;
+}
+.menu ul li a{
+    text-decoration: none;
+    color: #fff;
+}
